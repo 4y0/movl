@@ -1,0 +1,19 @@
+{
+  "name": "cesd",
+  "author": "4y0",
+  "version": "0.0.0",
+  "description": "A simple CLI tool to easily bootstrap chrome extension examples 🐹",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["Google Chrome", "Chrome Extensions"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "2.9.0",
+    "prompt": "1.0.0",
+    "request": "2.74.0",
+    "unzip": "0.1.11"
+  }
+}
