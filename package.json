@@ -1,14 +1,20 @@
 {
   "name": "cesd",
-  "author": "4y0",
+  "author": "",
   "version": "0.0.0",
   "description": "A simple CLI tool to easily bootstrap chrome extension examples 🐹",
-  "main": "index.js",
+  "main": "prompter.js",
+  "preferGlobal": true,
+  "bin": {
+    "cesd": "prompter.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["Google Chrome", "Chrome Extensions"],
-  "author": "",
+  "keywords": [
+    "Google Chrome",
+    "Chrome Extensions"
+  ],
   "license": "ISC",
   "dependencies": {
     "commander": "2.9.0",

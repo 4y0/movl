@@ -114,6 +114,12 @@ if (program.List) {
 }
 
 if (program.download) { 
+	prompt.start();
+	prompt.message = "";
+	if(program.download === true){
+		console.log('Wrong command. Please try cesd -d [sample number]');
+		return;
+	}
 	var downloadExtension = extensionsE[program.download];
 	if(!downloadExtension){
 		doDownloadPrompt();
