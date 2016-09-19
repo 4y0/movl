@@ -1,7 +1,7 @@
 {
   "name": "movl",
   "author": "4y0",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Personal seed-project scaffolder",
   "main": "prompter.js",
   "preferGlobal": true,
