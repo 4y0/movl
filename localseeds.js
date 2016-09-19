@@ -1,3 +1,3 @@
 
-var localseeds = require('fs').readdirSync('./localseeds');
+var localseeds = require('fs').readdirSync(__dirname+'/localseeds');
 module.exports = localseeds;
