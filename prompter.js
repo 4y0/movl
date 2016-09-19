@@ -2,7 +2,7 @@
 var program     = require('commander');
 var prompt      = require('prompt');
 var extensionsE = require('./example_links');
-console.log(__dirame);
+console.log(__dirname);
 /*extensionsE['all'] = {
 	name:'all',
 	example_context:'ALL EXAMPLES',
