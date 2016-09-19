@@ -61,7 +61,7 @@ function downloadUrl(seed_url) {
     var file_name = seed_url.split('/')[4];
 	console.log("*****",seed_url.split('/')[4]);
 
-	request(seed_url).pipe(fs.createWriteStream('./localseeds/' + seed_url.split('/')[4] + '.zip'))
+	request(seed_url).pipe(fs.createWriteStream(__dirname + '/localseeds/' + seed_url.split('/')[4] + '.zip'))
 	//require('./mox')(extension.url);
 
 }
