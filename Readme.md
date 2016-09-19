@@ -1,16 +1,13 @@
-# Chrome Extension Sample Downloader (CESD) v0.0.0
+# Personal project scaffolder
 
-A simple CLI util for downloading and setting up Chrome Extension examples. Inspired by [Orbitbot's Example repo](https://github.com/orbitbot/chrome-extensions-examples).
+Simple (quicker) alt to using Yeoman. (Personal opinion)
 
 ## How to use
 
-`npm install -g cesb`
+`npm install -g movl`
 
-### List examples (Defaults to 5 per page)
-`cesd -l [perpage]`
+### List saved seeds (Defaults to 5 per page)
+`movl -l [perpage]`
 
-### Download example 4
-`cesd -d 4`
-
-### Download all examples
-`cesd -d all`
+### Download morx-web git zip and save as local seed for re-use
+`movl -d https://github.com/4y0/morx-web/archive/master.zip`

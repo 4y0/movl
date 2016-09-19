@@ -1,30 +1,23 @@
 #!/usr/bin/env node
 var program     = require('commander');
 var prompt      = require('prompt');
-var extensionsE = require('./example_links');
-console.log(__dirname);
-/*extensionsE['all'] = {
-	name:'all',
-	example_context:'ALL EXAMPLES',
-	url:'https://github.com/orbitbot/chrome-extensions-examples/archive/master.zip'
-};*/
+var localSeeds = require('./localseeds'); 
 
 
 program
   .version('0.0.0')
   .option('-l, --List [num]', 'List Available Project Seeds')
-  .option('-d, --download [num]', 'Download Seed with number num')
+  .option('-a, --app  [num]', 'Scaffold seed with num')
+  .option('-d, --download [url]', 'Download Seed to local')
   .parse(process.argv);
 
 var promptProperties = {};
 
-promptProperties.downloadnumber = {
+promptProperties.downloadurl = {
 
-  name:       'downloadnumber',
-  message:    'Please specify a seed number to download. (\'all\' to download all)',
-  validator:  /\d+|all/,
-  warning:    'Must respond with a valid number or \'all\'',
-  default:    '0'
+  name:       'downloadurl',
+  message:    'Please specify a url to download.', 
+  default:    ''
 
 };
 
@@ -40,10 +33,10 @@ promptProperties.paginate = {
 function doDownloadPrompt() {
 
 	prompt.message = "";
-	prompt.get([promptProperties.downloadnumber], function (err, result) {
+	prompt.get([promptProperties.downloadurl], function (err, result) {
 
-		if(result && result.downloadnumber){
-			downloadTheExtension(result.downloadnumber);
+		if(result && result.downloadurl){
+			downloadUrl(result.downloadurl);
 		}
 		else
 		{
@@ -53,32 +46,40 @@ function doDownloadPrompt() {
 
 }
 
-function downloadTheExtension(extension) {
+function downloadUrl(seed_url) {
 
-	if(!extension){
+	if(!seed_url){
 		doDownloadPrompt();
 		return;
 	}
+	//var url = require("url");
+	//var path = require("path");
+	var request = require("request");
+	var fs = require("fs");
+	//var parsed = url.parse(seed_url);
+    //console.log(path.basename(parsed.pathname));
+    var file_name = seed_url.split('/')[4];
+	console.log("*****",seed_url.split('/')[4]);
 
-	console.log("*****",extension);
-	require('./mox')(extension.url);
+	request(seed_url).pipe(fs.createWriteStream('./localseeds/' + seed_url.split('/')[4] + '.zip'))
+	//require('./mox')(extension.url);
 
 }
 
 if (program.List) {
 
-	var extensions       = extensionsE.slice(0);
-	var loadedExtensions = [];
+	var seeds       = localSeeds.slice(0);
+	var loadedSeeds = [];
 	var start            = 0;
 
 	program.List = program.List == 1 ? 5 : program.List;
 
-	function extensionsSlice(start, length) {
+	function seedsSlice(start, length) {
 
-		loadedExtensions = loadedExtensions.concat(extensions.splice(0, length));
-		loadedExtensions.forEach
+		loadedSeeds = loadedSeeds.concat(seeds.splice(0, length));
+		loadedSeeds.forEach
 		(
-			function (extension, i) {
+			function (seed, i) {
 				i = i + ''; 
 				i = i.length == 1 ? ' '+ i +'  ' : ' ' + i + ' '; 
 				if(i > 0 && (i * 1) % length == 0)
@@ -87,12 +88,12 @@ if (program.List) {
 					console.log('******----************----*****');
 					console.log('******----************----*****');
 				}
-				console.log('[%s] *** %s',i, extension.example_context); 
+				console.log('[%s] *** %s',i, seed); 
 			}
 		)
 	}
 
-	extensionsSlice(start, program.List * 1);
+	seedsSlice(start, program.List * 1);
 
 	prompt.start();
 	prompt.message = "";
@@ -102,11 +103,17 @@ if (program.List) {
 		prompt.get([promptProperties.paginate], function(err, result){ 
 			if (result && result.page == '') {
 
-				extensionsSlice(start + (program.List * 1), (program.List * 1));
+				seedsSlice(start + (program.List * 1), (program.List * 1));
 				doPromptGet();
-			}else if( result && /^\d+$|all/.test(result.page)){ 
-				var downloadExtension = extensionsE[result.page]; 
-				downloadTheExtension(downloadExtension);
+			}else if( result ){ 
+				//console.log(result);
+				//console.log(localSeeds[result.page]);
+				//var downloadExtension = extensionsE[result.page]; 
+				var seed = localSeeds[result.page];
+				if(seed){
+					require('./mox')(seed);
+				}
+				//downloadTheExtension(downloadExtension);
 			}
 		});
 	}
@@ -117,16 +124,15 @@ if (program.download) {
 	prompt.start();
 	prompt.message = "";
 	if(program.download === true){
-		console.log('Wrong command. Please try cesd -d [sample number]');
+		console.log('Wrong command. Please try movl -d [url]');
 		return;
 	}
-	var downloadExtension = extensionsE[program.download];
-	if(!downloadExtension){
-		doDownloadPrompt();
+
+	if(program.download != ""){
+		console.log('Adding seedproject to local collection');
+		downloadUrl(program.download);
 	}
-	else{
-		console.log('Downloading "%s" %s' , downloadExtension.example_context, downloadExtension.name);
-		downloadTheExtension(downloadExtension);
-	}
+
+	 
 	
 }
