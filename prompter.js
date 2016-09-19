@@ -131,8 +131,27 @@ if (program.download) {
 	if(program.download != ""){
 		console.log('Adding seedproject to local collection');
 		downloadUrl(program.download);
-	}
-
-	 
-	
+	}	
 }
+
+if (program.app) {
+	prompt.start();
+	prompt.message = "";
+	if(program.app === true){
+		console.log('Wrong command. Please try movl -a [seed number]');
+		return;
+	}
+	else{
+		//console.log(program.app)
+		var seed = localSeeds[program.app];
+		if(!seed){
+			console.log('Seed not found. Please try movl -l to see a list of available seed numbers');
+		}
+		else{
+			require('./mox')(seed);
+		}
+		//downloadUrl(program.download);
+	}
+}
+
+
