@@ -1,19 +1,18 @@
 {
-  "name": "cesd",
-  "author": "",
+  "name": "movl",
+  "author": "4y0",
   "version": "0.0.0",
-  "description": "A simple CLI tool to easily bootstrap chrome extension examples 🐹",
+  "description": "Personal seed-project scaffolder",
   "main": "prompter.js",
   "preferGlobal": true,
   "bin": {
-    "cesd": "prompter.js"
+    "movl": "prompter.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Google Chrome",
-    "Chrome Extensions"
+    "Scaffold"
   ],
   "license": "ISC",
   "dependencies": {

@@ -2,18 +2,18 @@
 var program     = require('commander');
 var prompt      = require('prompt');
 var extensionsE = require('./example_links');
-
-extensionsE['all'] = {
+console.log(__dirame);
+/*extensionsE['all'] = {
 	name:'all',
 	example_context:'ALL EXAMPLES',
 	url:'https://github.com/orbitbot/chrome-extensions-examples/archive/master.zip'
-};
+};*/
 
 
 program
   .version('0.0.0')
-  .option('-l, --List [num]', 'List Available Extension Examples')
-  .option('-d, --download [num]', 'Download extension with number num')
+  .option('-l, --List [num]', 'List Available Project Seeds')
+  .option('-d, --download [num]', 'Download Seed with number num')
   .parse(process.argv);
 
 var promptProperties = {};
@@ -21,7 +21,7 @@ var promptProperties = {};
 promptProperties.downloadnumber = {
 
   name:       'downloadnumber',
-  message:    'Please specify an extension sample number to download. (\'all\' to download all)',
+  message:    'Please specify a seed number to download. (\'all\' to download all)',
   validator:  /\d+|all/,
   warning:    'Must respond with a valid number or \'all\'',
   default:    '0'
